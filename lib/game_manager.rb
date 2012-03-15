@@ -97,17 +97,13 @@ class Game_Manager
     if id == Gosu::KbSpace
       # Test/Debug Code
       color_transitions = [Gosu::Color.argb(0xffffffff),
-                           Gosu::Color.argb(0xffff0000)]
-      transition_durations = nil
-      add_object(:ct_fps,
-                 Color_Transitions.new(@ui_manager.ui(:ui_default).element(:label_fps),
-                                      color_transitions, transition_durations,
-                                      true, Color_Transitions::Loop_Style::FIFO))
+                           Gosu::Color.argb(0xff7f5f5f),
+                           Gosu::Color.argb(0xff5f2034)]
+      transition_durations = [5000, 5000, 5000]
       add_object(:ct_scene,
                  Color_Transitions.new(@ui_manager.ui(:ui_default).element(:img_scene),
                                       color_transitions, transition_durations,
-                                      true, Color_Transitions::Loop_Style::FIFO))
-      @objects[:ct_fps].activate
+                                      true, Color_Transitions::Loop_Style::LIFO))
       @objects[:ct_scene].activate
     end
   end

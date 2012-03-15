@@ -13,8 +13,10 @@ class Color_Transitions < Time_Object
   def initialize(target, colors, durations, looping=false, loop_style=Loop_Style::FIFO, expiration_time=nil)
     @active_transition = 0
     @target = target
-    validate_colors(colors)
-    validate_durations(durations)
+    @colors = colors
+    @durations = durations
+    #validate_colors(colors)
+    #validate_durations(durations)
     @looping = looping
     @loop_style = loop_style
 
