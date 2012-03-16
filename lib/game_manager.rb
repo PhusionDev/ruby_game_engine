@@ -99,12 +99,14 @@ class Game_Manager
       color_transitions = [Gosu::Color.argb(0xffffffff),
                            Gosu::Color.argb(0xff7f5f5f),
                            Gosu::Color.argb(0xff5f2034)]
-      transition_durations = [5000, 5000, 5000]
+      transition_durations = [1000, 1000, 1000, nil, 6000]
       add_object(:ct_scene,
                  Color_Transitions.new(@ui_manager.ui(:ui_default).element(:img_scene),
                                       color_transitions, transition_durations,
                                       true, Color_Transitions::Loop_Style::LIFO))
       @objects[:ct_scene].activate
+      @ui_manager.ui(:ui_default).new_label(:label_ct, 320, 320, "", @objects[:ct_scene], "Arial", 14)
+      puts @objects[:ct_scene].durations.to_s
     end
   end
   

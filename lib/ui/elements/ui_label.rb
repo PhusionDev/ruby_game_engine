@@ -16,7 +16,7 @@ class UI_Label < UI_Element
                  color=Color)
     super(x, y)
     @text = text
-    @text_object = text_object
+    link_to_object(text_object)
     @font_name = font_name
     @font_height = font_height
     @bold = bold

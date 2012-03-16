@@ -9,18 +9,23 @@ class Color_Transitions < Time_Object
   include Colored
   
   Color_Positions = [:alpha, :red, :blue, :green]
+  Min_Duration = 25
   
-  def initialize(target, colors, durations, looping=false, loop_style=Loop_Style::FIFO, expiration_time=nil)
+  def initialize(target, colors, durations=Min_Duration, looping=false, loop_style=Loop_Style::FIFO, expiration_time=nil)
     @active_transition = 0
     @target = target
-    @colors = colors
-    @durations = durations
-    #validate_colors(colors)
-    #validate_durations(durations)
+    #@colors = colors
+    #@durations = durations
+    validate_colors(colors)
+    validate_durations(durations)
     @looping = looping
     @loop_style = loop_style
-
+    @expiration_time = expiration_time
     reset
+  end
+  
+  def durations
+    return @durations
   end
   
   def activate
@@ -43,16 +48,16 @@ class Color_Transitions < Time_Object
     # "Updating transition # " << @active_transition.to_s
     update_status = super
     transition_colors
-    puts "Target = Transition" if @target.color == @colors[@active_transition]
+    #puts "Target = Transition" if @target.color == @colors[@active_transition]
     next_transition if update_status == :end || @target.color == @colors[@active_transition]
   end
   
   def reset
-    puts "Transition: " << @active_transition.to_s << "/" << (@colors.length - 1).to_s
+    #puts "Transition: " << @active_transition.to_s << "/" << (@colors.length - 1).to_s
     init(@durations[@active_transition], @expiration_time)
     init_values
     calculate_argb_updates
-    puts "Reactivating: " << @reactivate.to_s
+    #puts "Reactivating: " << @reactivate.to_s
     activate if @reactivate
   end
   
@@ -69,34 +74,45 @@ class Color_Transitions < Time_Object
   private
   
   def validate_colors(colors)
-  @colors = []
-    colors.each do |color|
-      this = color.is_a?(Gosu::Color) ? color : Gosu::Color.argb(color)
-      @colors.push(this)
+    @colors = colors.respond_to?(:each) ? colors : [colors]
+  
+    @colors.each do |color|
+      color = color.is_a?(Gosu::Color) ? color : Gosu::Color.argb(color)
     end
   end
   
   def validate_durations(durations)
-    @durations = durations.is_a?(Array) ? durations : [durations]
+    # Initialize duration(s) array
+    @durations = durations.respond_to?(:each) ? durations : [durations]
     
+    # Check for nil and too-short durations
+    index = 0
     @durations.each do |duration|
-      if not(duration == nil)
-        if duration <= 0
-          duration = 1
-        end
+      if duration == nil
+        @durations[index] = Min_Duration
       else
-        duration = 1
+        if duration < Min_Duration
+          @durations[index] = Min_Duration
+        end
       end
+      index += 1
     end
-    
+
+    # Check for equal length transition and duration arrays
     if not(@durations.length == @colors.length)
-      # Fix this problem
       diff = @colors.length - @durations.length
+      #puts "Adjusting " <<  @durations.length.to_s << " durations for " << @colors.length.to_s << " color transitions"
       if not(diff < 0)
         diff.times do
+          #puts "Adding a duration of " << @durations[0].to_s
           @durations.push(@durations[0])
         end
       else
+        #puts "Removing " << diff.abs.to_s << " durations"
+        diff.abs.times do
+          @durations.slice!(@colors.length)
+          #puts "New durations count: " << @durations.length.to_s
+        end
       end
     end
   end
@@ -104,44 +120,44 @@ class Color_Transitions < Time_Object
   def next_transition
     if not(@colors.length == 1)
       if not(@active_transition == @colors.length - 1)
-        puts "Not at the end of transitions yet"
+        #puts "Not at the end of transitions yet"
         if not(@loop_style == Loop_Style::LIFO)
-          puts "Loop Style: FIFO, incrementing transition by 1"
+          #puts "Loop Style: FIFO, incrementing transition by 1"
           @active_transition += 1
         else
-          puts "Loop Style: LIFO, incrementing transition by direction"
+          #puts "Loop Style: LIFO, incrementing transition by direction"
           @loop_direction = :forward if @loop_direction == nil
           @loop_direction = :forward if @active_transition == 0 && @loop_direction == :backward
-          puts "Loop Direction: " << @loop_direction.to_s
+          #puts "Loop Direction: " << @loop_direction.to_s
           @active_transition += @loop_direction == :forward ? 1 : -1
         end
       else
-        puts "End of transitions array"
+        #puts "End of transitions array"
         if @looping
           if not(@loop_style == Loop_Style::LIFO)
-            puts "Loop Style: FIFO, going to beginning of list"
+            #puts "Loop Style: FIFO, going to beginning of list"
             @active_transition = 0
           else
-            puts "Loop Style: LIFO, going backwards in list"
+            #puts "Loop Style: LIFO, going backwards in list"
             @loop_direction = :backward
             @active_transition -= 1
           end
-          puts "Reached the end, but looping"
+          #puts "Reached the end, but looping"
           stop_transitions = false
         else
-          puts "Reached the end and not looping"
+          #puts "Reached the end and not looping"
           stop_transitions = true
         end
       end
     else
-      puts "Only 1 transition"
+      #puts "Only 1 transition"
     end
     if not(stop_transitions)
-      puts "Reset variables for new transition"
+      #puts "Reset variables for new transition"
       @reactivate = true
       reset
     else
-      puts "Transitions stopped, not resetting"
+      #puts "Transitions stopped, not resetting"
       @reactivate = false
     end
   end
