@@ -1,10 +1,8 @@
-﻿class FPS_Object
-  def initialize
-    update
-  end
-  
+﻿require_relative 'game_object'
+
+class FPS_Object < Game_Object 
   def update
-    @fps = Gosu::fps()
+    @fps = Gosu::fps() if @active
   end
   
   def to_s

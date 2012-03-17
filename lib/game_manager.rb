@@ -59,6 +59,7 @@ class Game_Manager
   # Testing/Debugging
   def create_test_ui
     @game_objects_manager.add_object(:gosu_fps, FPS_Object.new)
+    @game_objects_manager.object(:gosu_fps).activate
     @ui_manager.new_ui(:ui_default)
     @ui_manager.ui(:ui_default).new_image(:img_scene, $output.active_window, 0, 0, "res/images/scene/default.png")
     @ui_manager.ui(:ui_default).new_label(:label_fps, 0, 0, "", @game_objects_manager.object(:gosu_fps), "Arial", 30)
