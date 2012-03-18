@@ -41,6 +41,14 @@ end
 
 module Visibility
   attr_accessor :hidden
+  
+  def hide
+    @hidden = true
+  end
+  
+  def show
+    @hidden = false
+  end
 end
 
 module Colored
@@ -54,4 +62,8 @@ module Colored
   def color=(color)
     @color = color.is_a?(Gosu::Color) ? color.dup : Gosu::Color.argb(color)
   end
+end
+
+module Color_Preset
+
 end

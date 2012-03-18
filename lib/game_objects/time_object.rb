@@ -1,5 +1,12 @@
 ﻿require_relative 'game_object'
 
+# Currently, the Time_Object class operates on a per-frame basis of
+# time calculation, therefore the time values will be different
+# depending on the user's current framerate. When passing
+# millisecond values to a Time_Object, you are basing that time
+# on 60 frames/updates per second.
+# Ultimately, this class needs to be fixed to work with non-variable
+# time, independent of the frame-rate.
 class Time_Object < Game_Object
   attr_accessor :update_tick, :time, :expired, :expiration_time
   
