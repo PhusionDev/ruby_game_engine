@@ -1,4 +1,5 @@
 ﻿require 'forwardable'
+require_relative 'rectangle'
 
 module Dimensions
   attr_accessor :height, :width, :depth

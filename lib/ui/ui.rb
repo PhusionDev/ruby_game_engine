@@ -27,7 +27,6 @@ class UI
   end
   
   def remove_element(name)
-    # Remove Element
   end
   
   def new_image(name, output, x=0, y=0,
@@ -135,7 +134,6 @@ class UI
   end
   
   def display_label(label)
-    #puts label.font
     $font_cache.fonts[label.font].draw(label.text, label.x, label.y, 1, 1, 1, label.color)
   end
   

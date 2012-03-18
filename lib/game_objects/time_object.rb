@@ -1,5 +1,6 @@
 ﻿require_relative 'game_object'
 
+# FIX-ME
 # Currently, the Time_Object class operates on a per-frame basis of
 # time calculation, therefore the time values will be different
 # depending on the user's current framerate. When passing
