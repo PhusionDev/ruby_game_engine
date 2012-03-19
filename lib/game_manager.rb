@@ -62,7 +62,7 @@ class Game_Manager
     @game_objects_manager.object(:gosu_fps).activate
     @ui_manager.new_ui(:ui_default)
     @ui_manager.ui(:ui_default).new_image(:img_scene, $output.active_window, 0, 0, "res/images/scene/default.png")
-    @ui_manager.ui(:ui_default).element(:img_scene).scale(:uniform, 0.5)
+    @ui_manager.ui(:ui_default).element(:img_scene).scale(:separate, 0.25, 0.75)
     @ui_manager.ui(:ui_default).new_label(:label_fps, 0, 0, "", @game_objects_manager.object(:gosu_fps), "Arial", 30)
   end
 end

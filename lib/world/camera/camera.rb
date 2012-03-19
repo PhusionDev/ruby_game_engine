@@ -5,8 +5,8 @@
   
   def initialize(x = 0, y = 0)
     move_to(x, y)
-    @half_width = $game_window.width.to_i/2
-    @half_height = $game_window.height.to_i/2
+    @half_width = $game_window.width.to_i/2.0
+    @half_height = $game_window.height.to_i/2.0
     update_view_bounds
   end
   
@@ -25,22 +25,18 @@
   def display_to(display)
   
   end
-  
-  # Protected Methods
-  protected
-  
-  # Private Methods
-  private
+
+  private # Private Methods #
   
   def view_changed?
-    if not(x == @view_bounds.x_center) || not(y == @view_bounds.y_center)
+    if not(@x == @view_bounds.x_center) || not(@y == @view_bounds.y_center)
       return true
     end
     return false
   end
   
   def update_view_bounds
-    @view_bounds = Rectangle.new(x - @half_width, x + @half_width,
-                                 y - @half_height, y + @half_height)
+    @view_bounds = Rectangle.new(@x - @half_width, @x + @half_width,
+                                 @y - @half_height, @y + @half_height)
   end
 end

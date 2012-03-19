@@ -13,4 +13,7 @@
     init_gosu_image(output, image_file)
     init_colored(color)
   end
+  
+  def update
+  end
 end

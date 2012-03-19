@@ -26,23 +26,25 @@ module Gosu_Image
   def scale(type, *args)
     if not args == nil
       case type
-        when :uniform
+        when :uniform, :locked, :both
           if not(args[0] == nil)
             @scale_x, @scale_y = args[0] > 0 ? [args[0]] * 2 : [1] * 2
           end
-        when :independant
+        when :independent, :individual, :separate
           if not(args[0] == nil) && not(args[1] == nil)
-            @scale_x = args[0] > 0 ? args[0] : 1
-            @scale_y = args[1] > 0 ? args[1] : 1
+            @scale_x = args[0] > 0 ? args[0] : 1.0
+            @scale_y = args[1] > 0 ? args[1] : 1.0
           end
-        when :x
+        when :x, :width
           if not(args[0] == nil)
-            @scale_x = args[0] > 0 ? args[0] : 1
+            @scale_x = args[0] > 0 ? args[0] : 1.0
           end
-        when :y
+        when :y, :height
           if not(args[0] == nil)
-            @scale_x = args[0] > 0 ? args[0] : 1
+            @scale_x = args[0] > 0 ? args[0] : 1.0
           end
+        else
+          # Invalid scale-type passed
       end
     end
   end

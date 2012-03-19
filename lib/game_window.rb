@@ -15,7 +15,7 @@ class Game_Window < Gosu::Window
   
   def init_output
     $output = Output.new
-    $output.add_window(self)
+    $output.add(:game_window, self)
   end
   
   def init_game_manager

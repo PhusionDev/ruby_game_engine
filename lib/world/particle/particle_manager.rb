@@ -8,5 +8,7 @@ class Particle_Manager
   end
   
   def update
+    @particles.each do |particle|
+    end
   end
 end
