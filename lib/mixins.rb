@@ -20,9 +20,31 @@ module Gosu_Image
     @output = output
     @image_file = image_file
     @active = false
+    scale(:uniform, 1.0)
   end
   
-  def scale_by(x_factor, y_factor)
+  def scale(type, *args)
+    if not args == nil
+      case type
+        when :uniform
+          if not(args[0] == nil)
+            @scale_x, @scale_y = args[0] > 0 ? [args[0]] * 2 : [1] * 2
+          end
+        when :independant
+          if not(args[0] == nil) && not(args[1] == nil)
+            @scale_x = args[0] > 0 ? args[0] : 1
+            @scale_y = args[1] > 0 ? args[1] : 1
+          end
+        when :x
+          if not(args[0] == nil)
+            @scale_x = args[0] > 0 ? args[0] : 1
+          end
+        when :y
+          if not(args[0] == nil)
+            @scale_x = args[0] > 0 ? args[0] : 1
+          end
+      end
+    end
   end
   
   def activate
@@ -31,8 +53,8 @@ module Gosu_Image
   end
   
   def deactivate
-    image_unload
     @active = false
+    image_unload  
   end
   
   def image_load(window = @output)

@@ -138,6 +138,6 @@ class UI
   end
   
   def display_image(image)
-    image.image.draw(image.x, image.y, 1, 1, 1, image.color)
+    image.image.draw(image.x, image.y, 1, image.scale_x, image.scale_y, image.color)
   end
 end
