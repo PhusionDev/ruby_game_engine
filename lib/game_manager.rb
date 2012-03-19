@@ -1,6 +1,6 @@
 ﻿require 'nokogiri'
 
-#require_relative 'rectangle'
+require_relative 'rectangle'
 require_relative 'world/world'
 require_relative 'ui/ui_manager'
 require_relative 'game_objects/game_objects_manager'

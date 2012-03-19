@@ -8,10 +8,8 @@ class UI_Image < UI_Element
   Default_Color = 0xffffffff
   
   def initialize(output, x=0, y=0, image_file=Default_Image, color=Default_Color)
-    @output = output
     super(x, y)
-    self.image_file = image_file
-    self.color = color
-    self.active = false
+    init_gosu_image(output, image_file)
+    init_colored(color)
   end
 end

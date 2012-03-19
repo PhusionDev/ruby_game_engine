@@ -1,5 +1,4 @@
 ﻿require 'forwardable'
-require_relative 'rectangle'
 
 module Dimensions
   attr_accessor :height, :width, :depth
@@ -16,6 +15,15 @@ end
 
 module Gosu_Image
   attr_accessor :active, :image, :image_file, :scale_x, :scale_y, :output
+  
+  def init_gosu_image(output, image_file)
+    @output = output
+    @image_file = image_file
+    @active = false
+  end
+  
+  def scale_by(x_factor, y_factor)
+  end
   
   def activate
     image_load
@@ -59,6 +67,10 @@ module Colored
 
   def_delegators :@color, :alpha, :red, :blue, :green, :hue, :saturation, :value,
                           :alpha=,:red=,:blue=,:green=,:hue=,:saturation=,:value=
+  
+  def init_colored(color)
+    self.color = color
+  end
   
   def color=(color)
     @color = color.is_a?(Gosu::Color) ? color.dup : Gosu::Color.argb(color)
