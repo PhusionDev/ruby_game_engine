@@ -23,6 +23,14 @@
     end
   end
   
+  def window(name)
+    return @windows[name]
+  end
+  
+  def buffer(name)
+    return @buffers[name]
+  end
+  
   def remove(name, output_type)
     name.to_sym if not name.is_a?(Symbol)
     output_type.to_sym if not output_type.is_a?(Symbol)
