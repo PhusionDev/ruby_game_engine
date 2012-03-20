@@ -36,10 +36,9 @@ class UI
   end
   
   def new_label(name, x=0, y=0, text_string="", text_object=nil,
-                 font_name=UI_Label::Font_Name,font_height=UI_Label::Font_Height, bold=UI_Label::Bold,
-                 italic=UI_Label::Italic, underline=UI_Label::Underline,
+                 font_name=UI_Label::Font_Name,font_height=UI_Label::Font_Height,
                  color=UI_Label::Color)
-    label = UI_Label.new(x,y,text_string,text_object,font_name,font_height,bold,italic,underline,color)
+    label = UI_Label.new(x,y,text_string,text_object,font_name,font_height,color)
     return add_element(name, label)
   end
   

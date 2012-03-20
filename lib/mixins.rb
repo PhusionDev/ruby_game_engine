@@ -72,7 +72,49 @@ module Gosu_Image
 end
 
 module Text_Value
-  attr_accessor :text, :text_object, :font_name, :font_height, :bold, :italic, :underline
+  attr_accessor :text, :text_object, :font_name, :font_height
+  
+  def init_text_value(text, text_object, font_name, font_height)
+    @text, @text_object = text, text_object
+    @font_name, @font_height = font_name, font_height
+    @had_object = text_object == nil ? false : true
+    link_to_object(text_object)
+  end
+  
+  def link_to_object(object)
+    @text_object = object
+  end
+  
+  def unlink_object
+    @text_object = nil
+  end
+  
+  def clear_text
+    @text = ""
+  end
+  
+  def font
+    return (@font_name + "_" + @font_height.to_s).to_sym
+  end
+  
+  def update
+    if not(@text_object == nil)
+      if @text_object.respond_to?(:expired)
+        if @text_object.expired
+          unlink_object
+          unlinked = true
+        end
+      end
+      if not(unlinked)
+        @had_object = true if not(@had_object)
+        @text = @text_object.to_s
+      end
+    else
+      if @had_object && not(@text == "")
+        clear_text
+      end
+    end
+  end
 end
 
 module Visibility
