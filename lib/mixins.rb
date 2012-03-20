@@ -8,8 +8,11 @@ module Positionable
   attr_accessor :x, :y
   
   def move_to(x = 0, y = 0)
-    @x = x
-    @y = y
+    @x, @y = x, y
+  end
+  
+  def translate(x = 0, y = 0)
+    move_to(@x + x, @y + y)
   end
 end
 
@@ -30,7 +33,7 @@ module Gosu_Image
           if not(args[0] == nil)
             @scale_x, @scale_y = args[0] > 0 ? [args[0]] * 2 : [1] * 2
           end
-        when :independent, :individual, :separate
+        when :independent, :individual, :separate, :xy
           if not(args[0] == nil) && not(args[1] == nil)
             @scale_x = args[0] > 0 ? args[0] : 1.0
             @scale_y = args[1] > 0 ? args[1] : 1.0
