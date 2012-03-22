@@ -16,7 +16,8 @@ class Game_Manager
     #testing purposes
     create_test_ui
   end
-  
+ 
+  # Core Methods (Update/Display)
   def update
     check_input
     @game_objects_manager.update
@@ -29,12 +30,14 @@ class Game_Manager
     @ui_manager.display
   end
   
+  # Helper method for calling button_down from Game_Window
   def button_down(id)
     check_button_down(id)
   end
   
-  private # Private Methods #
+  private
   
+  # Input related methods
   def check_input
     check_input_keyboard
     check_input_mouse
@@ -44,18 +47,19 @@ class Game_Manager
   def check_input_keyboard
   end
   
-  def check_button_down(id)
-    if id == Gosu::KbSpace
-      # Test/Debug code
-    end
-  end
-  
   def check_input_mouse
   end
   
   def check_input_gamepad
   end
   
+  # Gets called from Game_Window#button_down?(id)
+  def check_button_down(id)
+    if id == Gosu::KbSpace
+      # Test/Debug code
+    end
+  end
+ 
   # Testing/Debugging
   def create_test_ui
     @game_objects_manager.add_object(:gosu_fps, FPS_Object.new)
