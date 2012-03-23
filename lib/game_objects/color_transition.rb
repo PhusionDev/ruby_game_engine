@@ -75,9 +75,11 @@ class Color_Transition < Time_Object
   
   def validate_colors(colors)
     @colors = colors.respond_to?(:each) ? colors : [colors]
-  
+
+    index = 0
     @colors.each do |color|
-      color = color.is_a?(Gosu::Color) ? color : Gosu::Color.argb(color)
+      @colors[index] = color.is_a?(Gosu::Color) ? color : Gosu::Color.argb(color)
+      index += 1
     end
   end
   

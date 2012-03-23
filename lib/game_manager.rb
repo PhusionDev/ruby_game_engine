@@ -18,6 +18,7 @@ class Game_Manager
   end
  
   # Core Methods (Update/Display)
+  
   def update
     check_input
     @game_objects_manager.update
@@ -31,6 +32,7 @@ class Game_Manager
   end
   
   # Helper method for calling button_down from Game_Window
+  
   def button_down(id)
     check_button_down(id)
   end
@@ -38,6 +40,7 @@ class Game_Manager
   private
   
   # Input related methods
+  
   def check_input
     check_input_keyboard
     check_input_mouse
@@ -55,8 +58,18 @@ class Game_Manager
   
   # Gets called from Game_Window#button_down?(id)
   def check_button_down(id)
+    if id == Gosu::KbEscape
+      $output.window(:game_window).close
+    end
+
     if id == Gosu::KbSpace
-      # Test/Debug code
+      # test/debug code
+      # the following code is merely for testing purposes, and to highlight
+      # some of the game engine's current features.
+      @game_objects_manager.add_object(:ct_scene,
+                                       Color_Transition.new(@ui_manager.ui(:ui_default).element(:img_scene),
+                                                            [0xffffffff, 0xff888844], 3000, true))
+      @game_objects_manager.object(:ct_scene).activate
     end
   end
  

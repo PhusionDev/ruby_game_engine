@@ -7,6 +7,8 @@ class Game_Objects_Manager
   def initialize
     @game_objects = {}
   end
+
+  # generic object methods (add/remove)
   
   def add_object(name, object)
     if not(name.is_a?(Symbol))
@@ -26,6 +28,18 @@ class Game_Objects_Manager
   def object(name)
     return @game_objects[name]
   end
+  
+  # specific game-object methods
+
+  def new_fps_object
+
+  end
+
+  def new_color_transition
+
+  end  
+
+  # core methods (update/display)
   
   def update
     @game_objects.each_pair do |name, object|
