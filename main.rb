@@ -3,7 +3,7 @@
 require_relative 'lib/mixins'
 require_relative 'lib/game_window'
 
-$version = "0.1.1 (Incomplete Intial Build)"
+$version = "Untitled Game Engine (Ruby w/Gosu) by PhusionDev"
 $application_path = Dir.pwd
 
 $game_window = Game_Window.new
