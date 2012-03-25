@@ -2,7 +2,7 @@
 require_relative 'font_cache'
 
 class UI_Manager
-  attr_accessor :user_interfaces, :active_ui, :font_cache
+  attr_accessor :user_interfaces, :active_ui#, :font_cache
   
   def initialize
     @user_interfaces = {}
