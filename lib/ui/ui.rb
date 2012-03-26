@@ -133,10 +133,10 @@ class UI
   end
   
   def display_label(label)
-    $font_cache.fonts[label.font].draw(label.text, label.x, label.y, 1, 1, 1, label.color)
+    $font_cache.fonts[label.font].draw(label.text, label.x, label.y, label.depth, 1, 1, label.color)
   end
   
   def display_image(image)
-    image.image.draw(image.x, image.y, 1, image.scale_x, image.scale_y, image.color)
+    image.image.draw(image.x, image.y, image.depth, image.scale_x, image.scale_y, image.color)
   end
 end

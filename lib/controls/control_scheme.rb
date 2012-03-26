@@ -1,3 +1,9 @@
+# Do not directly modify this control scheme.
+# Make a new file: name_controls.rb and inherit from this class.
+# Override the methods below in your own control scheme to fit
+# your needs, however, it's advisable to leave self.check_input
+# un-modified.
+
 class Control_Scheme
   def self.check_input
     self.check_input_keyboard
@@ -6,7 +12,7 @@ class Control_Scheme
   end
 
   def self.button_down(id)
-    # This gets manually called by a Gosu::Window object "Game_Window"
+    # This method is used for one-time button presses 
     # override this method
   end
 

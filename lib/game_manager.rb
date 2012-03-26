@@ -34,30 +34,9 @@ class Game_Manager
     @ui_manager.display
   end
   
-  # Helper method for calling button_down from Game_Window
+  # Helper method for calling button_down
   
   def button_down(id)
     @controls_manager.button_down(id)
   end
-  
-  private
-  
-  # Input related methods
-  
-  def check_input
-    check_input_keyboard
-    check_input_mouse
-    check_input_gamepad
-  end
-  
-  def check_input_keyboard
-  end
-  
-  def check_input_mouse
-  end
-  
-  def check_input_gamepad
-  end
-  
-  # Gets called from Game_Window#button_down?(id)
 end

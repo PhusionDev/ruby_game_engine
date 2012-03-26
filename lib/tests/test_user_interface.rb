@@ -17,8 +17,10 @@ class Test_User_Interface < Test
     if not($game_manager.ui_manager.ui(user_interface) == nil)
       $game_manager.ui_manager.ui(user_interface).new_label(:label_fps,
                                                             0, 0, "",
-                                                            $game_manager.game_objects_manager.object(:gosu_fps))
+                                                            $game_manager.game_objects_manager.object(:gosu_fps),
+                                                            "Arial", 24, 0xffff6666)
   
+      $game_manager.ui_manager.ui(user_interface).element(:label_fps).depth = 1
     end
   end
 

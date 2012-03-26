@@ -5,6 +5,7 @@ class Controls_Manager
                       
   def initialize
     load_control_schemes
+    set_active_control_scheme(Default_Controls)
   end
   
   def set_active_control_scheme(scheme)
@@ -21,6 +22,11 @@ class Controls_Manager
 
   private
 
+  # This method will load all control_schemes within the lib/controls folder
+  # of the engine with a naming convention of:
+  # name_controls.rb
+  # where name is whatever name you choose to give them.
+  # Make sure to read control_scheme.rb before making your own control scheme.
   def load_control_schemes
     Dir.foreach("lib/controls") do |control_scheme|
       if not(/\w+_+controls/.match(control_scheme) == nil)

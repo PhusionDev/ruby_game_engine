@@ -1,7 +1,23 @@
 ﻿require 'forwardable'
 
 module Dimensions
-  attr_accessor :height, :width, :depth
+  attr_accessor :height, :width
+
+  def depth=(value)
+    if not(value == nil)
+      if value >= 0
+        @depth = value
+      end
+    end
+  end
+
+  def depth
+    if not(@depth == nil)
+      return @depth
+    else
+      return 0
+    end
+  end
 end
 
 module Positionable
