@@ -17,11 +17,9 @@ class Game_Manager
     @ui_manager = UI_Manager.new
     @game_objects_manager = Game_Objects_Manager.new
     @controls_manager = Controls_Manager.new
-    @controls_manager.set_active_control_scheme(Test_Controls)
   end
  
   # Core Methods (Update/Display)
-  
   def update
     @controls_manager.update
     @game_objects_manager.update
@@ -35,7 +33,6 @@ class Game_Manager
   end
   
   # Helper method for calling button_down
-  
   def button_down(id)
     @controls_manager.button_down(id)
   end

@@ -6,6 +6,6 @@ class FPS_Object < Game_Object
   end
   
   def to_s
-    return @active ? @fps.to_s : "Inactive"
+    return @active ? @fps.to_s << " FPS" : "Inactive"
   end
 end
