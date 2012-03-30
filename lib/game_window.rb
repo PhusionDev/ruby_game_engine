@@ -19,18 +19,18 @@ class Game_Window < Gosu::Window
   end
   
   def init_game_manager
-    $game_manager = Game_Manager.new
+    @game_manager = Game_Manager.new
   end
   
   def update
-    $game_manager.update
+    @game_manager.update
   end
   
   def draw
-    $game_manager.display
+    @game_manager.display
   end
   
   def button_down(id)
-    $game_manager.button_down(id)
+    @game_manager.button_down(id)
   end
 end

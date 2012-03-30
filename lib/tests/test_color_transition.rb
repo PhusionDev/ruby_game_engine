@@ -6,13 +6,13 @@ class Test_Color_Transition < Test
   end
 
   def self.simple_transition(user_interface = :default, element = :default)
-    if not($game_manager.ui_manager.ui(user_interface) == nil)
-      if not($game_manager.ui_manager.ui(user_interface).element(element) == nil)
-        $game_manager.game_objects_manager.add_object(
+    if not($ui_manager.ui(user_interface) == nil)
+      if not($ui_manager.ui(user_interface).element(element) == nil)
+        $game_objects_manager.add_object(
           :ct_scene,
-          Color_Transition.new($game_manager.ui_manager.ui(user_interface).element(element),
+          Color_Transition.new($ui_manager.ui(user_interface).element(element),
           [0xffffffff, 0xff888844], 3000, true))
-        $game_manager.game_objects_manager.object(:ct_scene).activate
+        $game_objects_manager.object(:ct_scene).activate
       end
     end
   end
