@@ -2,11 +2,10 @@
 require_relative 'font_cache'
 
 class UI_Manager
-  attr_accessor :user_interfaces, :active_ui#, :font_cache
+  attr_accessor :user_interfaces, :active_user_interfaces
   
   def initialize
     @user_interfaces = {}
-    @active_ui = nil
     $font_cache = Font_Cache.new
   end
   
@@ -18,7 +17,6 @@ class UI_Manager
       if @user_interfaces[name] == nil
         if user_interface.is_a?(UI)
           @user_interfaces.store(name, user_interface)
-          select_ui(user_interface) if @active_ui == nil
         end
       end
     end
@@ -44,14 +42,14 @@ class UI_Manager
   end
   
   def update
-    @active_ui.update if not(@active_ui == nil)
+    @user_interfaces.each_pair do |name, ui|
+      ui.update if ui.active
+    end
   end
-  
-  def display(user_interface = @active_ui)
-    if user_interface.is_a?(UI)
-      if user_interface.active
-        user_interface.display
-      end
+
+  def display
+    @user_interfaces.each_pair do |name, ui|
+      ui.display if ui.active
     end
   end
   
@@ -63,27 +61,4 @@ class UI_Manager
   end
   
   private
-  
-  def select_ui(user_interface)
-    if user_interface.is_a?(UI)
-      if not(@active_ui == nil)
-        deactivate_ui(@active_ui)
-        @active_ui = nil       
-      end
-      activate_ui(user_interface)
-      @active_ui = user_interface
-    end
-  end
-  
-  def activate_ui(user_interface)
-    if user_interface.is_a?(UI)
-      user_interface.activate
-    end
-  end
-  
-  def deactivate_ui(user_interface)
-    if user_interface.is_a?(UI)
-      user_interface.deactivate
-    end
-  end
 end

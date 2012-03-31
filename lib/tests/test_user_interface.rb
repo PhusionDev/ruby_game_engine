@@ -7,7 +7,7 @@ class Test_User_Interface < Test
   end
 
   def self.basic_ui
-    $ui_manager.new_ui(:default)
+    $ui_manager.new_ui(:default).activate
     self.fps
     self.information
     self.scenery
@@ -18,9 +18,9 @@ class Test_User_Interface < Test
     
     if not($ui_manager.ui(user_interface) == nil)
       $ui_manager.ui(user_interface).new_label(:label_fps,
-                                                            0, 0, "",
-                                                            $game_objects_manager.object(:gosu_fps),
-                                                            "Arial", 24, 0xffffff00)
+                                               0, 0,
+                                              "", $game_objects_manager.object(:gosu_fps),
+                                              "Arial", 24, 0xffffff00)
   
       $ui_manager.ui(user_interface).element(:label_fps).depth = 1
     end
@@ -29,20 +29,24 @@ class Test_User_Interface < Test
   def self.information(user_interface = :default)
     text = "ESC: Quit"
     $ui_manager.ui(user_interface).new_label(:label_controls_01,
-                                                          0, 32, text, nil,
-                                                         "Arial", 24, 0xff000000).depth = 1
+                                             0, 32,
+                                             text, nil,
+                                             "Arial", 24, 0xff000000).depth = 1
   
     text = "SPACE: Test a Color_Transition object"
     $ui_manager.ui(user_interface).new_label(:label_controls_02,
-                                                          0, 64, text, nil,
-                                                         "Arial", 24, 0xff000000).depth = 1
+                                             0, 64,
+                                             text, nil,
+                                             "Arial", 24, 0xff000000).depth = 1
   end
 
   def self.scenery(user_interface = :default, output = :default)
     if not($ui_manager.ui(user_interface) == nil)
       if not($output.window(output) == nil)
-        $ui_manager.ui(user_interface).new_image(:img_scenery, $output.window(output), 0, 0,
-                                                             "res/images/scene/default.png")
+        $ui_manager.ui(user_interface).new_image(:img_scenery,
+                                                 $output.window(output),
+                                                 0, 0,
+                                                 "res/images/scene/default.png")
       end
     end
   end
