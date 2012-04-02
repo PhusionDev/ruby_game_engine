@@ -55,9 +55,4 @@ class Map_Manager
   
   def to_xml
   end
-  
-  protected # Protected Methods #
-
-  private # Private Methods #
-  
 end

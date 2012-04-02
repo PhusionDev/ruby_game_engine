@@ -59,6 +59,4 @@ class UI_Manager
   
   def to_xml
   end
-  
-  private
 end

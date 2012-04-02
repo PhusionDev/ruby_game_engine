@@ -3,6 +3,18 @@
 module Dimensions
   attr_accessor :height, :width
 
+  class Depth_Layer
+    Background = 0
+    BG_Decoration = 1
+    Sprite, Sprite_1 = 127, 127
+    Sprite_2 = 128
+    Sprite_3 = 129
+    Sprite_4 = 130
+    Foreground = 253
+    FG_Decoration = 254
+    User_Interface = 255
+  end
+
   def depth=(value)
     if not(value == nil)
       if value >= 0

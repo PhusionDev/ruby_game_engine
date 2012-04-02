@@ -21,8 +21,7 @@ class Test_User_Interface < Test
                                                0, 0,
                                               "", $game_objects_manager.object(:gosu_fps),
                                               "Arial", 24, 0xffffff00)
-  
-      $ui_manager.ui(user_interface).element(:label_fps).depth = 1
+      $ui_manager.ui(user_interface).element(:label_fps).depth = Dimensions::Depth_Layer::User_Interface
     end
   end
 
@@ -31,13 +30,15 @@ class Test_User_Interface < Test
     $ui_manager.ui(user_interface).new_label(:label_controls_01,
                                              0, 32,
                                              text, nil,
-                                             "Arial", 24, 0xff000000).depth = 1
+                                             "Arial", 24, 0xff000000)
+    $ui_manager.ui(user_interface).element(:label_controls_01).depth = Dimensions::Depth_Layer::User_Interface 
   
     text = "SPACE: Test a Color_Transition object"
     $ui_manager.ui(user_interface).new_label(:label_controls_02,
                                              0, 64,
                                              text, nil,
-                                             "Arial", 24, 0xff000000).depth = 1
+                                             "Arial", 24, 0xff000000)
+    $ui_manager.ui(user_interface).element(:label_controls_02).depth = Dimensions::Depth_Layer::User_Interface
   end
 
   def self.scenery(user_interface = :default, output = :default)
@@ -47,6 +48,7 @@ class Test_User_Interface < Test
                                                  $output.window(output),
                                                  0, 0,
                                                  "res/images/scene/default.png")
+        $ui_manager.ui(user_interface).element(:img_scenery).depth = Dimensions::Depth_Layer::Background
       end
     end
   end

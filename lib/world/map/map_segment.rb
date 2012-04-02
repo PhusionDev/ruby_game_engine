@@ -1,6 +1,6 @@
 ﻿require_relative 'map_tile'
 
-class MapSegment
+class Map_Segment
   include Positionable
   include Dimensions
   
@@ -12,7 +12,12 @@ class MapSegment
     move_to(x, y)
   end
   
-  def add_map_tile
+  def add_map_tile(tile)
+    if tile.is_a?(Map_Tile)
+      if not(@map_tiles.include?(tile))
+        @map_tiles.push(tile)
+      end 
+    end
   end
   
   def remove_map_tile
@@ -21,8 +26,7 @@ class MapSegment
   def new_map_tile(local_x, local_y, image_file = Map_Tile::Default_Tile)
     world_x = x - local_x
     world_y = y - local_y
-    tile = MapTile.new(world_x, world_y, image_file, self)
-    return tile
+    add_map_tile(Map_Tile.new(world_x, world_y, image_file, self))
   end
   
   def update
@@ -30,9 +34,4 @@ class MapSegment
       map_tile.update
     end
   end
-  
-  protected # Protected Methods #
-
-  private # Private Methods #
-  
 end
