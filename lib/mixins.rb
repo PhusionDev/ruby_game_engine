@@ -45,7 +45,7 @@ module Positionable
 end
 
 module Gosu_Image
-  attr_accessor :active, :image, :image_file, :scale_x, :scale_y, :output
+  attr_accessor :image, :image_file, :scale_x, :scale_y, :output
   
   def init_gosu_image(output, image_file)
     @output = output
@@ -53,7 +53,19 @@ module Gosu_Image
     @active = false
     scale(:uniform, 1.0)
   end
-  
+ 
+  def active=(value)
+    if value == true or value == false
+      @active = value
+      image_load if @active
+      image_unload if not(@active)
+    end
+  end
+
+  def active
+    return @active
+  end
+
   def scale(type, *args)
     if not args == nil
       case type
@@ -78,16 +90,6 @@ module Gosu_Image
           # Invalid scale-type passed
       end
     end
-  end
-  
-  def activate
-    image_load
-    @active = true
-  end
-  
-  def deactivate
-    @active = false
-    image_unload  
   end
   
   def image_load(window = @output)

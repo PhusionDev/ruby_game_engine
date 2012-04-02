@@ -2,12 +2,26 @@
 require_relative 'font_cache'
 
 class UI_Manager
-  attr_accessor :user_interfaces, :active_user_interfaces
+  attr_accessor :user_interfaces
   
   def initialize
     @user_interfaces = {}
     $font_cache = Font_Cache.new
   end
+  
+  def show_only(ui_name)
+    ui_name.to_sym if not(ui_name.is_a?(Symbol))
+
+    if not(@user_interfaces[ui_name] == nil)
+      @user_interfaces.each_pair do |name, ui|
+        if not(name == ui_name)
+          ui.active = false
+        else
+          ui.active = true
+        end
+      end
+    end
+  end 
   
   def add_ui(name, user_interface)
     if not(name.is_a?(Symbol))
@@ -43,13 +57,13 @@ class UI_Manager
   
   def update
     @user_interfaces.each_pair do |name, ui|
-      ui.update if ui.active
+      ui.update
     end
   end
 
   def display
     @user_interfaces.each_pair do |name, ui|
-      ui.display if ui.active
+      ui.display
     end
   end
   

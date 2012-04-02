@@ -9,6 +9,9 @@ require_relative 'controls/controls_manager'
 # tests
 require_relative 'tests/all_tests'
 
+# utilities
+require_relative 'map_segmenter'
+
 class Game_Manager
   # Initialize game manager components
   def initialize

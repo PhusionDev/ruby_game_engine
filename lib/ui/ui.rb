@@ -5,12 +5,10 @@ require_relative 'elements/ui_button'
 require_relative 'elements/ui_image'
 
 class UI
-  attr_accessor :active, :ui_elements, :show_frame_rate
+  attr_accessor :ui_elements 
   
   def initialize()
-    @active = false
     @ui_elements = {}
-    @show_frame_rate = false
   end
   
   def add_element(name, ui_element)
@@ -20,7 +18,7 @@ class UI
     if @ui_elements[name] == nil
       if ui_element.is_a?(UI_Element)
         @ui_elements.store(name, ui_element)
-        activate_element(ui_element)
+        @ui_elements[name].active = @active ? true : false
       end
     end
     return @ui_elements[name]
@@ -51,17 +49,19 @@ class UI
     end
     return nil
   end
-  
-  def activate
-    @active = true
-    activate_elements
+
+  def active=(value)
+    if value == true || value == false
+      @active = value
+      activate_elements if @active
+      deactivate_elements if not(@active)
+    end
   end
-  
-  def deactivate
-    @active = false
-    deactivate_elements
+ 
+  def active
+    return @active
   end
-  
+
   def update
     if @active
       @ui_elements.each_pair do |name, ui_element|
@@ -71,9 +71,11 @@ class UI
   end
   
   def display
-    @ui_elements.each_pair do |name, ui_element|
-      if not(ui_element.hidden == true)
-        display_element(ui_element)
+    if @active
+      @ui_elements.each_pair do |name, ui_element|
+        if not(ui_element.hidden == true)
+          display_element(ui_element)
+        end
       end
     end
   end
@@ -87,35 +89,15 @@ class UI
   
   private # Private Methods #
   
-  def activate_element(ui_element)
-    if ui_element.is_a?(UI_Element)
-      if ui_element.respond_to?(:activate)
-        ui_element.activate
-      end
-    end
-  end
-  
-  def deactivate_element(ui_element)
-    if ui_element.is_a?(UI_Element)
-      if ui_element.respond_to?(:deactivate)
-        ui_element.deactivate
-      end
-    end
-  end
-  
   def activate_elements
     @ui_elements.each_pair do |name, ui_element|
-      if ui_element.respond_to?(:activate)
-        ui_element.activate
-      end
+      ui_element.active = true
     end
   end
   
   def deactivate_elements
     @ui_elements.each_pair do |name, ui_element|
-      if ui_element.respond_to?(:deactivate)
-        ui_element.deactivate
-      end
+      ui_element.active = false
     end
   end
   

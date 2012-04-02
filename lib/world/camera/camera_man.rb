@@ -56,7 +56,7 @@ class Camera_Man
   def update
   end
   
-  def display(display = $game_window, camera = @held_camera)
+  def display(display = $output.window(:default), camera = @held_camera)
     if not(display == nil) && not(@held_camera == nil)
       if display.is_a?(GameWindow) && camera.is_a?(Camera)
         camera.display_to(display)

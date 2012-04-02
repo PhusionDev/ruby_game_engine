@@ -4,10 +4,11 @@ require_relative 'game_manager'
 require_relative 'output'
 
 class Game_Window < Gosu::Window
-#  attr_accessor :game_manager
+  Width = 640
+  Height = 640
 
   def initialize
-    super 640, 640, false
+    super Width, Height, false
     self.caption = $version
     init_output
     init_game_manager
@@ -29,7 +30,7 @@ class Game_Window < Gosu::Window
   def draw
     @game_manager.display
   end
-  
+
   def button_down(id)
     @game_manager.button_down(id)
   end
